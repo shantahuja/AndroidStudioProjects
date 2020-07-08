@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateCollection">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="273dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="32dp"
+        android:text="Create Collection"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#03A9F4"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="69dp" />
+
+    <ImageView
+        android:id="@+id/lion"
+        android:layout_width="160dp"
+        android:layout_height="221dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/lionwithfeathers3"
+        app:layout_constraintEnd_toStartOf="@+id/lionwithfeathers2"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.673"
+        app:srcCompat="@drawable/lion" />
+
+    <ImageView
+        android:id="@+id/lionwithfeathers2"
+        android:layout_width="179dp"
+        android:layout_height="322dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/lionwithgeometry2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/lionwithfeathers2" />
+
+    <ImageView
+        android:id="@+id/lionwithfeathers3"
+        android:layout_width="143dp"
+        android:layout_height="263dp"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/collectionName"
+        app:layout_constraintEnd_toStartOf="@+id/lionwithgeometry2"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/lionwithfeathers3" />
+
+    <ImageView
+        android:id="@+id/lionwithgeometry2"
+        android:layout_width="169dp"
+        android:layout_height="191dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/createCollectionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/lionwithgeometry2" />
+
+    <Button
+        android:id="@+id/createCollectionButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
+        android:enabled="false"
+        android:text="Create Collection"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/collectionName" />
+
+    <EditText
+        android:id="@+id/collectionName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Collection Name"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/createCollectionButton"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
