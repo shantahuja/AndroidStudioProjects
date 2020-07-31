@@ -19,18 +19,18 @@ object InstagramRepository {
             val mediaData = api.getMediaData(edge.id)
             when (mediaData.media_type) {
                 "CAROUSEL_ALBUM" -> {
-                    val albumMediaData = api.getAlbumResponse(edge.id).data
-                    mediaDataList.addAll(albumMediaData.map {
-                        Content(it, edge.caption)
+                    val albumMediaData = api.getAlbumResponse(edge.id).data.filter { it.media_type == "VIDEO" }
+                    mediaDataList.addAll(albumMediaData.mapIndexed { index, data ->
+                        Content(data, edge.caption.split("\nx\n")[index])
                     })
                 }
                 "VIDEO" -> {
-                    mediaDataList.add(Content(mediaData, edge.caption))
+                    mediaDataList.add(Content(mediaData, edge.caption.split("\nx\n")[0]))
                 }
                 else -> continue@edgeLoop
             }
         }
-        return mediaDataList.filter { it.media_type == "VIDEO" }
+        return mediaDataList
     }
 
     init {
@@ -38,7 +38,7 @@ object InstagramRepository {
             val request = chain.request()
             val url = request.url().newBuilder().addQueryParameter(
                 "access_token",
-                "IGQVJXLXlFMWw5WDNpb1hxYlpULTg1ZAkNVVEtwcm5RUkpKUnNOb050ZA1RwZAG80Mjh0T3BSWHo1Ujc3b2ZASdGgwRlJPWk5pWkFOOVhCOVQ2WG9qZAmJsNXBmdnQ5SV9sWVJ3Y1JJbElR"
+                "IGQVJVeTVqM3FvQjA3aHJ0aXlCcHJvbGMwa3Ayd1FPejhVZAERtTGRMRVBnSk1SUlNfS21ab3FjODhJbDNjXzh2cVRiUFlnZATB0ZAG9ETjc2cWg1UnNWOUdzVzJfaTFRTU5jTmxTcGRn"
             ).build()
             chain.proceed(request.newBuilder().url(url).build())
         }).build()

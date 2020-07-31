@@ -21,16 +21,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-class ContentAdapter(val coroutineScope: LifecycleCoroutineScope) : ListAdapter<Content, ContentAdapter.ContentViewHolder>(ContentDiffCallback()) {
+class ContentAdapter(val coroutineScope: LifecycleCoroutineScope, val clickHandler: ((String) -> Unit)? = null) : ListAdapter<Content, ContentAdapter.ContentViewHolder>(ContentDiffCallback()) {
 
 
-    lateinit var selectionTracker: SelectionTracker<Long>
+    var selectionTracker: SelectionTracker<Long>? = null
 
     inner class ContentViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(content: Content) = with(itemView) {
-            bindSelectedState(this, selectionTracker.isSelected(content.id))
-            content_item_caption.text = content.caption.split("\n")[0]
+            if (selectionTracker != null) bindSelectedState(this, selectionTracker!!.isSelected(content.id))
+            else if (clickHandler != null) setOnClickListener {
+                clickHandler!!(content.media_url)
+            }
+            content_item_caption.text = content.caption
             val url = content.media_url
 
             coroutineScope.launchWhenStarted {

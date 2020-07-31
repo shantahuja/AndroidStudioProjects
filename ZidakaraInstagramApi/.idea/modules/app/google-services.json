@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "613143289007",
+    "firebase_url": "https://zidakarainstagramapi.firebaseio.com",
+    "project_id": "zidakarainstagramapi",
+    "storage_bucket": "zidakarainstagramapi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613143289007:android:e95462421cc8a08750885a",
+        "android_client_info": {
+          "package_name": "com.example.zidakarainstagramapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613143289007-u20b89n0l2ekf8n1305v4ehpc7sujnm0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zidakarainstagramapi",
+            "certificate_hash": "cb448e422ad7d7eacdf6f8d8875c87f01c1dfa9c"
+          }
+        },
+        {
+          "client_id": "613143289007-8vi0i28tva1gjjso86hsfoh2rc45g5d1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZmO0wkooTKkAbOBbnJPlfYMiXY45czCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613143289007-8vi0i28tva1gjjso86hsfoh2rc45g5d1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
