@@ -65,18 +65,17 @@ class VideoPlayerActivity : AppCompatActivity(), SurfaceHolder.Callback,
         mediaPlayer?.start()
         mediaController?.setMediaPlayer(this)
         mediaController?.setAnchorView(video_player)
-        lifecycleScope.launch {
-            mediaController?.isEnabled = true
-            mediaController?.show()
-        }
+        mediaController?.isEnabled = true
+        mediaController?.show()
     }
 
     override fun onDestroy() {
         mediaController?.hide()
+        mediaController?.isEnabled = false
         mediaPlayer?.stop()
         mediaPlayer?.release()
-        mediaPlayer = null
         mediaController = null
+        mediaPlayer = null
         super.onDestroy()
     }
 
