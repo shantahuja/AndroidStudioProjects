@@ -12,25 +12,33 @@ object InstagramRepository {
 
     private val api: Api
 
+    var content: List<Content>? = null
+
     suspend fun getContent(): List<Content> {
-        val result = api.getInstagramEdges().data
-        val mediaDataList: MutableList<Content> = mutableListOf()
-        edgeLoop@ for (edge in result) {
-            val mediaData = api.getMediaData(edge.id)
-            when (mediaData.media_type) {
-                "CAROUSEL_ALBUM" -> {
-                    val albumMediaData = api.getAlbumResponse(edge.id).data.filter { it.media_type == "VIDEO" }
-                    mediaDataList.addAll(albumMediaData.mapIndexed { index, data ->
-                        Content(data, edge.caption.split("\nx\n")[index])
-                    })
+        if (content == null) {
+            val result = api.getInstagramEdges().data
+            val mediaDataList: MutableList<Content> = mutableListOf()
+            edgeLoop@ for (edge in result) {
+                val mediaData = api.getMediaData(edge.id)
+                when (mediaData.media_type) {
+                    "CAROUSEL_ALBUM" -> {
+                        val albumMediaData =
+                            api.getAlbumResponse(edge.id).data.filter { it.media_type == "VIDEO" }
+                        mediaDataList.addAll(albumMediaData.mapIndexed { index, data ->
+                            Content(data, edge.caption.split("\nx\n")[index])
+                        })
+                    }
+                    "VIDEO" -> {
+                        mediaDataList.add(Content(mediaData, edge.caption.split("\nx\n")[0]))
+                    }
+                    else -> continue@edgeLoop
                 }
-                "VIDEO" -> {
-                    mediaDataList.add(Content(mediaData, edge.caption.split("\nx\n")[0]))
-                }
-                else -> continue@edgeLoop
             }
+            content = mediaDataList
+            return mediaDataList
+        } else {
+            return content!!
         }
-        return mediaDataList
     }
 
     init {
@@ -38,7 +46,7 @@ object InstagramRepository {
             val request = chain.request()
             val url = request.url().newBuilder().addQueryParameter(
                 "access_token",
-                "IGQVJVeTVqM3FvQjA3aHJ0aXlCcHJvbGMwa3Ayd1FPejhVZAERtTGRMRVBnSk1SUlNfS21ab3FjODhJbDNjXzh2cVRiUFlnZATB0ZAG9ETjc2cWg1UnNWOUdzVzJfaTFRTU5jTmxTcGRn"
+                "IGQVJYZAlk3YVU0OVFyMDZAjZA0FzWUExcWVTMUx2eUk3TlJodEpsRnFHWTR0UXBIYUVPbFhmdFl6LTVMeVdfSVNfX0hiUW9QRVNZAXzRtOFNTQkJDMk9kZAnpMNzFZAWlJlX295XzhtZAHV3"
             ).build()
             chain.proceed(request.newBuilder().url(url).build())
         }).build()

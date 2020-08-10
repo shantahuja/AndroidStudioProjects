@@ -5,10 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
-import com.example.zidakarainstagramapi.ui.collection.MyZidakaraCollection
+import com.example.zidakarainstagramapi.ui.collection.MyZidakaraCollectionList
 import com.example.zidakarainstagramapi.R
-import com.example.zidakarainstagramapi.data.InstagramRepository
 import com.example.zidakarainstagramapi.ui.content.ZidakaraContent
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -102,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         my_zidakara_collection.setOnClickListener {
-            val intent = Intent(this, MyZidakaraCollection::class.java)
+            val intent = Intent(this, MyZidakaraCollectionList::class.java)
             startActivity(intent)
         }
     }

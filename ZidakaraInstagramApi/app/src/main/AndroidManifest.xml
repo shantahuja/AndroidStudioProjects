@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.collection.MyZidakaraCollectionView"></activity>
         <activity android:name=".ui.content.VideoPlayerActivity" />
-        <activity android:name=".ui.collection.MyZidakaraCollection" />
+        <activity android:name=".ui.collection.MyZidakaraCollectionList" />
         <activity android:name=".ui.content.ZidakaraContent" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>

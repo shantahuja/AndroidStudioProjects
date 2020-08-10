@@ -18,10 +18,12 @@ import com.example.zidakarainstagramapi.data.Content
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.content_item.view.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-class ContentAdapter(val coroutineScope: LifecycleCoroutineScope, val clickHandler: ((String) -> Unit)? = null) : ListAdapter<Content, ContentAdapter.ContentViewHolder>(ContentDiffCallback()) {
+class ContentAdapter(val coroutineScope: LifecycleCoroutineScope) : ListAdapter<Content, ContentAdapter.ContentViewHolder>(ContentDiffCallback()) {
 
 
     var selectionTracker: SelectionTracker<Long>? = null
@@ -29,15 +31,14 @@ class ContentAdapter(val coroutineScope: LifecycleCoroutineScope, val clickHandl
     inner class ContentViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(content: Content) = with(itemView) {
-            if (selectionTracker != null) bindSelectedState(this, selectionTracker!!.isSelected(content.id))
-            else if (clickHandler != null) setOnClickListener {
-                clickHandler!!(content.media_url)
-            }
+            bindSelectedState(this, selectionTracker!!.isSelected(content.id))
             content_item_caption.text = content.caption
             val url = content.media_url
 
             coroutineScope.launchWhenStarted {
-                val image = retrieveVideoFrameFromVideo(url)
+                val image = withContext(Dispatchers.IO) {
+                    retrieveVideoFrameFromVideo(url)
+                }
                 content_item_thumbnail.setImageBitmap(image)
             }
         }

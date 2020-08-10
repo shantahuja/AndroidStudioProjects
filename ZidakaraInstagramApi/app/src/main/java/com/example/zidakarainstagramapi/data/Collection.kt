@@ -8,4 +8,5 @@ import kotlinx.android.parcel.Parcelize
 data class Collection(
     @DocumentId val documentId: String = "",
     val name: String = "",
-    val videos: List<Long> = listOf()) : Parcelable
+    val videos: MutableList<Long> = mutableListOf()
+) : Parcelable

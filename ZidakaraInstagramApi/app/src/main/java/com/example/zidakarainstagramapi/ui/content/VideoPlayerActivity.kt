@@ -69,14 +69,14 @@ class VideoPlayerActivity : AppCompatActivity(), SurfaceHolder.Callback,
         mediaController?.show()
     }
 
-    override fun onDestroy() {
+    override fun onStop() {
         mediaController?.hide()
         mediaController?.isEnabled = false
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaController = null
         mediaPlayer = null
-        super.onDestroy()
+        super.onStop()
     }
 
    // override fun onPause() {
